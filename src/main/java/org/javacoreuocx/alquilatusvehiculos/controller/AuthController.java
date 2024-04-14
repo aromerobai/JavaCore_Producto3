@@ -1,44 +1,105 @@
 package org.javacoreuocx.alquilatusvehiculos.controller;
 
+import org.javacoreuocx.alquilatusvehiculos.model.Cliente;
+import org.javacoreuocx.alquilatusvehiculos.repository.ClienteRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.ui.Model;
-import org.javacoreuocx.alquilatusvehiculos.model.Cliente;
-import org.javacoreuocx.alquilatusvehiculos.service.ClienteService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.javacoreuocx.alquilatusvehiculos.service.CustomSecurityService;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.javacoreuocx.alquilatusvehiculos.model.ContratoAlquiler;
+import org.javacoreuocx.alquilatusvehiculos.model.Oficina;
+import org.javacoreuocx.alquilatusvehiculos.model.Vehiculo;
+import org.javacoreuocx.alquilatusvehiculos.repository.ContratoAlquilerRepository;
+import org.javacoreuocx.alquilatusvehiculos.repository.OficinaRepository;
+import org.javacoreuocx.alquilatusvehiculos.repository.VehiculoRepository;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class AuthController {
 
     @Autowired
-    private ClienteService clienteService;
+    private VehiculoRepository vehiculoRepository;
+    @Autowired
+    private ClienteRepository clienteRepository;
+    @Autowired
+    private ContratoAlquilerRepository contratoAlquilerRepository;
+    @Autowired
+    private OficinaRepository oficinaRepository;
 
-    private CustomSecurityService customSecurityService;
-
-    @GetMapping("/login")
-    public String mostrarLogin(Model model) {
-        return "login";
+    @GetMapping("/home")
+    public String mostrarClienteHome(Model model) {
+        model.addAttribute("currentPage", "home");
+        return "cliente/home";
     }
 
-    @PostMapping("/login")
-    public String login(@RequestParam("user_name") String user_name, @RequestParam("password") String password) {
-        customSecurityService.autoLogin(user_name, password);
-        return "redirect:/home";
+    @GetMapping("/coches")
+    public String mostrarClienteCoches(Model model) {
+        model.addAttribute("currentPage", "coches");
+        model.addAttribute("vehiculos", vehiculoRepository.findAll());
+        return "cliente/coches";
     }
 
-    @GetMapping("/register")
-    public String mostrarRegister(Model model) {
-        model.addAttribute("cliente", new Cliente());
-        return "register"; // Asegúrate de tener la plantilla Thymeleaf 'registro.html'
+    @GetMapping("/reservas")
+    public String mostrarClienteReservas(Model model) {
+        model.addAttribute("currentPage", "reservas");
+        /*
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        */
+
+        // Las peticiones a DB de usuario están hardcodeadas. Deberán cambiarse al implementar la funcionalidad de login.
+        String email = "maria.lopez@empresa.com";
+        Cliente cliente = clienteRepository.findByUsername(email);
+
+        if (cliente != null) {
+            List<ContratoAlquiler> contratosAlquiler = contratoAlquilerRepository.findByClienteId(cliente.getId());
+            model.addAttribute("contratosAlquiler", contratosAlquiler);
+            return "cliente/reservas";
+        } else {
+            return "cliente/home";
+        }
     }
 
-    @PostMapping("/register")
-    public String registrarCliente(Cliente cliente) {
-        clienteService.registrarCliente(cliente);
-        customSecurityService.autoLogin(cliente.getEmail(), cliente.getPassword());
-        return "redirect:/home";
+    @GetMapping("/reservas/nueva")
+    public String mostrarFormularioDeNuevoContratoAlquiler(Model model) {
+        List<Oficina> oficinas = oficinaRepository.findAll();
+        List<Vehiculo> vehiculos = vehiculoRepository.findAll();
+
+        model.addAttribute("contratoAlquiler", new ContratoAlquiler());
+        model.addAttribute("oficinas", oficinas);
+        model.addAttribute("vehiculos", vehiculos);
+
+        return "cliente/reservas/nueva";
+    }
+
+    @PostMapping("/reservas/guardar")
+    public String guardarContratoAlquiler(@ModelAttribute("contratoAlquiler") ContratoAlquiler contratoAlquiler, RedirectAttributes redirectAttributes) {
+
+        //Se limpian los contratosAlquilerVehiculos existentes (para evitar datos duplicados)
+        contratoAlquiler.getContratoVehiculos().clear();
+
+        // Las peticiones a DB de usuario están hardcodeadas. Deberán cambiarse al implementar la funcionalidad de login.
+        String email = "maria.lopez@empresa.com";
+        Cliente cliente = clienteRepository.findByUsername(email);
+
+        if (cliente != null) {
+            contratoAlquiler.setCliente(cliente);
+            contratoAlquilerRepository.save(contratoAlquiler);
+            redirectAttributes.addFlashAttribute("mensaje", "Reserva realizada con éxito");
+            return "redirect:/reservas";
+        } else {
+            return "cliente/home";
+        }
+    }
+
+    @GetMapping("/contacto")
+    public String mostrarClienteContacto(Model model) {
+        model.addAttribute("currentPage", "contacto");
+        return "cliente/contacto";
     }
 }

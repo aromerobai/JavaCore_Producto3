@@ -1,6 +1,8 @@
 package org.javacoreuocx.alquilatusvehiculos.model;
 
 import jakarta.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "cliente")
@@ -12,19 +14,19 @@ public class Cliente {
     private String nombre;
     private String apellidos;
     @Column(unique = true)
-    private String email;
-    private String rol;
-    @Column(unique = true)
     private String nif;
+    @Column(unique = true)
+    private String username;
     private String password;
+    private String rol;
 
     public Cliente() {
     }
 
-    public Cliente(String nombre, String apellidos, String email, String password) {
+    public Cliente(String nombre, String apellidos, String username, String password) {
         this.nombre = nombre;
         this.apellidos = apellidos;
-        this.email = email;
+        this.username = username;
         this.password = password;
     }
 
@@ -32,7 +34,7 @@ public class Cliente {
         this.id = id;
         this.nombre = nombre;
         this.apellidos = apellidos;
-        this.email = email;
+        this.username = username;
         this.password = password;
     }
 
@@ -60,12 +62,12 @@ public class Cliente {
         this.apellidos = apellidos;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getRol() {

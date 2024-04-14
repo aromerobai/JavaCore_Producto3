@@ -6,7 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class AlquilatusvehiculosApplication {
 
-    public static void main(String[] args) throws Throwable {
-        SpringApplication.run(AlquilatusvehiculosApplication.class, args);
-    }
+        public static void main(String[] args) {
+                SpringApplication.run(AlquilatusvehiculosApplication.class, args);
+        }
+
 }

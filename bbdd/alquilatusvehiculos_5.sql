@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Generation Time: Mar 29, 2024 at 06:39 PM
+-- Generation Time: Apr 14, 2024 at 05:26 PM
 -- Server version: 8.0.36
 -- PHP Version: 8.2.8
 
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `cliente` (
   `id` bigint NOT NULL,
   `apellidos` varchar(255) DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
+  `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `nif` varchar(255) DEFAULT NULL,
   `nombre` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
@@ -41,7 +41,7 @@ CREATE TABLE `cliente` (
 -- Dumping data for table `cliente`
 --
 
-INSERT INTO `cliente` (`id`, `apellidos`, `email`, `nif`, `nombre`, `password`, `rol`) VALUES
+INSERT INTO `cliente` (`id`, `apellidos`, `username`, `nif`, `nombre`, `password`, `rol`) VALUES
 (1, 'Pérez', 'juan.perez@ejemplo.com', '12345678A', 'Juan', '', 'Particular'),
 (2, 'López', 'maria.lopez@empresa.com', '87654321B', 'María', '', 'Empresa'),
 (3, 'García', 'pedro.garcia@autonomo.com', '98765432C', 'Pedro', '', 'Autónomo'),
@@ -51,7 +51,9 @@ INSERT INTO `cliente` (`id`, `apellidos`, `email`, `nif`, `nombre`, `password`, 
 (7, 'Ruiz', 'alejandro.ruiz@yahoo.com', '12345678G', 'Alejandro', '', 'Particular'),
 (8, 'Jiménez', 'sandra.jimenez@icloud.com', '87654321H', 'Sandra', '', 'Autónomo'),
 (9, 'Hernández', 'miguel.hernandez@empresanueva.com', '98765432I', 'Miguel', '', 'Empresa'),
-(10, 'González', 'isabel.gonzalez@live.com', '12345678J', 'Isabel', '', 'Particular');
+(10, 'González', 'isabel.gonzalez@live.com', '12345678J', 'Isabel', '', 'Particular'),
+(11, 'admin', 'admin@admin.es', 'admin', 'admin', '$2a$10$jpbOmfpTdJd4xi9165X78.nW.vPQt2ifW0EycU7BXMBTak3qgnjMG', 'ADMIN'),
+(12, 'user', 'user@user.es', 'user', 'user', '$2a$10$YQzwLwAkMU3FuPHrjnzmuOj9gjjjPLY8caCTD7nQPSM2umK0YIpcu', 'USER');
 
 -- --------------------------------------------------------
 
@@ -179,7 +181,7 @@ INSERT INTO `vehiculo` (`id`, `marca`, `matricula`, `modelo`) VALUES
 --
 ALTER TABLE `cliente`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `UK_cmxo70m08n43599l3h0h07cc6` (`email`),
+  ADD UNIQUE KEY `UK_cmxo70m08n43599l3h0h07cc6` (`username`),
   ADD UNIQUE KEY `UK_42hc3bgo75s70bee20y1d58yv` (`nif`);
 
 --
@@ -219,7 +221,7 @@ ALTER TABLE `vehiculo`
 -- AUTO_INCREMENT for table `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `contrato_alquiler`
