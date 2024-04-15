@@ -26,12 +26,11 @@
                 <li class="nav-item" th:class="${currentPage == 'coches' ? 'nav-item active' : 'nav-item'}">
                     <a th:href="@{/coches}">NUESTROS VEHICULOS </a>
                 </li>
-                <li class="nav-item" th:class="${currentPage == 'reservas' ? 'nav-item active' : 'nav-item'}">
+                <li class="nav-item" sec:authorize="hasRole('ROLE_USER')" th:class="${currentPage == 'reservas' ? 'nav-item active' : 'nav-item'}">
                     <a th:href="@{/reservas}">RESERVAS</a>
                 </li>
 
                 <!-- Mostrar ADMINISTRAR si el usuario es administrador --> <!--th:if="${isAdmin}"-->
-
                 <li  id="header-dropdown" class="dropdown nav-item"
                      sec:authorize="hasRole('ROLE_ADMIN')" 
                      th:class="${currentPage != 'home' and currentPage != 'coches' and currentPage != 'reservas' ? 'nav-item active' : 'dropdown nav-item'}" >
@@ -52,7 +51,7 @@
                     </ul>
                 </li>
 
-                <!-- Mostrar CONTACTO si el usuario no es administrador o no ha iniciado sesión-->
+                <!-- Mostrar CONTACTO si el usuario no es administrador-->
                 <li sec:authorize="hasRole('ROLE_USER')" class="nav-item">
                     <a th:href="@{/contacto}">CONTACTO</a>
                 </li>
