@@ -3,6 +3,8 @@ package org.javacoreuocx.alquilatusvehiculos.controller;
 import org.javacoreuocx.alquilatusvehiculos.model.Cliente;
 import org.javacoreuocx.alquilatusvehiculos.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,14 +49,10 @@ public class AuthController {
     @GetMapping("/reservas")
     public String mostrarClienteReservas(Model model) {
         model.addAttribute("currentPage", "reservas");
-        /*
+
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
-        */
-
-        // Las peticiones a DB de usuario están hardcodeadas. Deberán cambiarse al implementar la funcionalidad de login.
-        String email = "maria.lopez@empresa.com";
-        Cliente cliente = clienteRepository.findByUsername(email);
+        Cliente cliente = clienteRepository.findByUsername(username);
 
         if (cliente != null) {
             List<ContratoAlquiler> contratosAlquiler = contratoAlquilerRepository.findByClienteId(cliente.getId());
@@ -84,8 +82,9 @@ public class AuthController {
         contratoAlquiler.getContratoVehiculos().clear();
 
         // Las peticiones a DB de usuario están hardcodeadas. Deberán cambiarse al implementar la funcionalidad de login.
-        String email = "maria.lopez@empresa.com";
-        Cliente cliente = clienteRepository.findByUsername(email);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        Cliente cliente = clienteRepository.findByUsername(username);
 
         if (cliente != null) {
             contratoAlquiler.setCliente(cliente);
