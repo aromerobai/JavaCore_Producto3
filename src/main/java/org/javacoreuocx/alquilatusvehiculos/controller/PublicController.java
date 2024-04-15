@@ -26,7 +26,11 @@ public class PublicController {
 
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
-        model.addAttribute("user", new Cliente());
+        Cliente cliente = new Cliente();
+        if(cliente.getRol() == null) {
+            cliente.setRol("USER");
+        }
+        model.addAttribute("user", cliente);
         return "register";
     }
 

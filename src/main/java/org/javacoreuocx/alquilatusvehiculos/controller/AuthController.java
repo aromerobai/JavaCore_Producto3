@@ -81,7 +81,6 @@ public class AuthController {
         //Se limpian los contratosAlquilerVehiculos existentes (para evitar datos duplicados)
         contratoAlquiler.getContratoVehiculos().clear();
 
-        // Las peticiones a DB de usuario están hardcodeadas. Deberán cambiarse al implementar la funcionalidad de login.
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
         Cliente cliente = clienteRepository.findByUsername(username);

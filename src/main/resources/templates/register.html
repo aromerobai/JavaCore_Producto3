@@ -33,13 +33,16 @@
               <label>NIF:</label>
               <input class="form-control" type="text" th:field="*{nif}" required />
             </div>
-            <div class="form-group">
+            <!--<div class="form-group">
               <label>Rol:</label>
               <select class="form-control" th:field="*{rol}" required>
                 <option value="">Seleccione un Rol</option>
                 <option value="USER">Usuario</option>
                 <option value="ADMIN">Administrador</option>
               </select>
+            </div>-->
+            <div class="form-group">
+              <input class="form-control" type="hidden" th:field="*{rol}" required />
             </div>
             <div class="form-group">
               <label>Email:</label>

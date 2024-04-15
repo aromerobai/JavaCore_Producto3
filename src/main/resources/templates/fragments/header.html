@@ -52,10 +52,10 @@
                     </ul>
                 </li>
 
-                <!-- Mostrar CONTACTO si el usuario no es administrador o no ha iniciado sesión
-                <li th:if="${!isAdmin}" class="nav-item">
+                <!-- Mostrar CONTACTO si el usuario no es administrador o no ha iniciado sesión-->
+                <li sec:authorize="hasRole('ROLE_USER')" class="nav-item">
                     <a th:href="@{/contacto}">CONTACTO</a>
-                </li>-->
+                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li th:if="${!#authorization.expression('isAuthenticated()')}">
