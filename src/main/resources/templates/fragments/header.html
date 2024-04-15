@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
 
+<html xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <link href="../../../resources/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/resources/css/bootstrap.min.css}"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,7 +9,7 @@
 <body>
 <nav class="navbar navbar-inverse" th:fragment="header">
     <div class="container" id="navbar-container">
-        <a class="navbar-brand" th:href="@{/home.html}">
+        <a class="navbar-brand" th:href="@{/home}">
             <img th:src="@{/images/logo.png}" class="logo-header d-inline-block" width="121" height="63" alt="Logo" />
         </a>
         <button class="navbar-toggle" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
