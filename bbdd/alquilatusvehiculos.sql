@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: db
--- Generation Time: Apr 14, 2024 at 05:26 PM
--- Server version: 8.0.36
--- PHP Version: 8.2.8
+-- Servidor: db
+-- Tiempo de generación: 16-04-2024 a las 15:27:13
+-- Versión del servidor: 8.0.36
+-- Versión de PHP: 8.2.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `alquilatusvehiculos`
+-- Base de datos: `alquilatusvehiculos`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cliente`
+-- Estructura de tabla para la tabla `cliente`
 --
 
 CREATE TABLE `cliente` (
@@ -38,27 +38,27 @@ CREATE TABLE `cliente` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data for table `cliente`
+-- Volcado de datos para la tabla `cliente`
 --
 
 INSERT INTO `cliente` (`id`, `apellidos`, `username`, `nif`, `nombre`, `password`, `rol`) VALUES
-(1, 'Pérez', 'juan.perez@ejemplo.com', '12345678A', 'Juan', '', 'Particular'),
-(2, 'López', 'maria.lopez@empresa.com', '87654321B', 'María', '', 'Empresa'),
-(3, 'García', 'pedro.garcia@autonomo.com', '98765432C', 'Pedro', '', 'Autónomo'),
-(4, 'Fernández', 'ana.fernandez@gmail.com', '12345678D', 'Ana', '', 'Particular'),
-(5, 'Sánchez', 'david.sanchez@hotmail.com', '87654321E', 'David', '', 'Particular'),
-(6, 'Martínez', 'laura.martinez@outlook.com', '98765432F', 'Laura', '', 'Empresa'),
-(7, 'Ruiz', 'alejandro.ruiz@yahoo.com', '12345678G', 'Alejandro', '', 'Particular'),
-(8, 'Jiménez', 'sandra.jimenez@icloud.com', '87654321H', 'Sandra', '', 'Autónomo'),
-(9, 'Hernández', 'miguel.hernandez@empresanueva.com', '98765432I', 'Miguel', '', 'Empresa'),
-(10, 'González', 'isabel.gonzalez@live.com', '12345678J', 'Isabel', '', 'Particular'),
+(1, 'Pérez', 'juan.perez@ejemplo.com', '12345678A', 'Juan', '', 'USER'),
+(2, 'López', 'maria.lopez@empresa.com', '87654321B', 'María', '', 'USER'),
+(3, 'García', 'pedro.garcia@autonomo.com', '98765432C', 'Pedro', '', 'USER'),
+(4, 'Fernández', 'ana.fernandez@gmail.com', '12345678D', 'Ana', '', 'USER'),
+(5, 'Sánchez', 'david.sanchez@hotmail.com', '87654321E', 'David', '', 'USER'),
+(6, 'Martínez', 'laura.martinez@outlook.com', '98765432F', 'Laura', '', 'USER'),
+(7, 'Ruiz', 'alejandro.ruiz@yahoo.com', '12345678G', 'Alejandro', '', 'USER'),
+(8, 'Jiménez', 'sandra.jimenez@icloud.com', '87654321H', 'Sandra', '', 'USER'),
+(9, 'Hernández', 'miguel.hernandez@empresanueva.com', '98765432I', 'Miguel', '', 'USER'),
+(10, 'González', 'isabel.gonzalez@live.com', '12345678J', 'Isabel', '', 'USER'),
 (11, 'admin', 'admin@admin.es', 'admin', 'admin', '$2a$10$jpbOmfpTdJd4xi9165X78.nW.vPQt2ifW0EycU7BXMBTak3qgnjMG', 'ADMIN'),
 (12, 'user', 'user@user.es', 'user', 'user', '$2a$10$YQzwLwAkMU3FuPHrjnzmuOj9gjjjPLY8caCTD7nQPSM2umK0YIpcu', 'USER');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `contrato_alquiler`
+-- Estructura de tabla para la tabla `contrato_alquiler`
 --
 
 CREATE TABLE `contrato_alquiler` (
@@ -70,7 +70,7 @@ CREATE TABLE `contrato_alquiler` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data for table `contrato_alquiler`
+-- Volcado de datos para la tabla `contrato_alquiler`
 --
 
 INSERT INTO `contrato_alquiler` (`id`, `fecha_fin`, `fecha_inicio`, `cliente_id`, `oficina_id`) VALUES
@@ -83,12 +83,13 @@ INSERT INTO `contrato_alquiler` (`id`, `fecha_fin`, `fecha_inicio`, `cliente_id`
 (7, '2024-03-31', '2024-03-28', 1, 7),
 (8, '2024-04-01', '2024-03-29', 2, 8),
 (9, '2024-04-02', '2024-03-30', 4, 9),
-(10, '2024-04-03', '2024-03-31', 3, 8);
+(10, '2024-04-03', '2024-03-31', 3, 8),
+(11, '2024-04-25', '2024-04-21', 12, 2);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `contrato_alquiler_vehiculo`
+-- Estructura de tabla para la tabla `contrato_alquiler_vehiculo`
 --
 
 CREATE TABLE `contrato_alquiler_vehiculo` (
@@ -98,7 +99,7 @@ CREATE TABLE `contrato_alquiler_vehiculo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data for table `contrato_alquiler_vehiculo`
+-- Volcado de datos para la tabla `contrato_alquiler_vehiculo`
 --
 
 INSERT INTO `contrato_alquiler_vehiculo` (`id`, `contrato_alquiler_id`, `vehiculo_id`) VALUES
@@ -111,12 +112,13 @@ INSERT INTO `contrato_alquiler_vehiculo` (`id`, `contrato_alquiler_id`, `vehicul
 (7, 6, 7),
 (8, 6, 8),
 (9, 7, 9),
-(10, 8, 8);
+(10, 8, 8),
+(11, 11, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `oficina`
+-- Estructura de tabla para la tabla `oficina`
 --
 
 CREATE TABLE `oficina` (
@@ -128,7 +130,7 @@ CREATE TABLE `oficina` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data for table `oficina`
+-- Volcado de datos para la tabla `oficina`
 --
 
 INSERT INTO `oficina` (`id`, `ciudad`, `codigo_postal`, `direccion`, `telefono`) VALUES
@@ -146,7 +148,7 @@ INSERT INTO `oficina` (`id`, `ciudad`, `codigo_postal`, `direccion`, `telefono`)
 -- --------------------------------------------------------
 
 --
--- Table structure for table `vehiculo`
+-- Estructura de tabla para la tabla `vehiculo`
 --
 
 CREATE TABLE `vehiculo` (
@@ -157,7 +159,7 @@ CREATE TABLE `vehiculo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data for table `vehiculo`
+-- Volcado de datos para la tabla `vehiculo`
 --
 
 INSERT INTO `vehiculo` (`id`, `marca`, `matricula`, `modelo`) VALUES
@@ -173,11 +175,11 @@ INSERT INTO `vehiculo` (`id`, `marca`, `matricula`, `modelo`) VALUES
 (10, 'Kia', '7890 VWX', 'Sportage');
 
 --
--- Indexes for dumped tables
+-- Índices para tablas volcadas
 --
 
 --
--- Indexes for table `cliente`
+-- Indices de la tabla `cliente`
 --
 ALTER TABLE `cliente`
   ADD PRIMARY KEY (`id`),
@@ -185,7 +187,7 @@ ALTER TABLE `cliente`
   ADD UNIQUE KEY `UK_42hc3bgo75s70bee20y1d58yv` (`nif`);
 
 --
--- Indexes for table `contrato_alquiler`
+-- Indices de la tabla `contrato_alquiler`
 --
 ALTER TABLE `contrato_alquiler`
   ADD PRIMARY KEY (`id`),
@@ -193,7 +195,7 @@ ALTER TABLE `contrato_alquiler`
   ADD KEY `FKs0nc9cxdffdiydilxjb85xgv1` (`oficina_id`);
 
 --
--- Indexes for table `contrato_alquiler_vehiculo`
+-- Indices de la tabla `contrato_alquiler_vehiculo`
 --
 ALTER TABLE `contrato_alquiler_vehiculo`
   ADD PRIMARY KEY (`id`),
@@ -201,65 +203,65 @@ ALTER TABLE `contrato_alquiler_vehiculo`
   ADD KEY `FK1ohnaw9tc2qrlks50wiss14tk` (`vehiculo_id`);
 
 --
--- Indexes for table `oficina`
+-- Indices de la tabla `oficina`
 --
 ALTER TABLE `oficina`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `vehiculo`
+-- Indices de la tabla `vehiculo`
 --
 ALTER TABLE `vehiculo`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `UK_deqhio123mhkt6x7insisbx3x` (`matricula`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT for table `cliente`
+-- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
   MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT for table `contrato_alquiler`
+-- AUTO_INCREMENT de la tabla `contrato_alquiler`
 --
 ALTER TABLE `contrato_alquiler`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `contrato_alquiler_vehiculo`
+-- AUTO_INCREMENT de la tabla `contrato_alquiler_vehiculo`
 --
 ALTER TABLE `contrato_alquiler_vehiculo`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `oficina`
+-- AUTO_INCREMENT de la tabla `oficina`
 --
 ALTER TABLE `oficina`
   MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT for table `vehiculo`
+-- AUTO_INCREMENT de la tabla `vehiculo`
 --
 ALTER TABLE `vehiculo`
   MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- Constraints for dumped tables
+-- Restricciones para tablas volcadas
 --
 
 --
--- Constraints for table `contrato_alquiler`
+-- Filtros para la tabla `contrato_alquiler`
 --
 ALTER TABLE `contrato_alquiler`
   ADD CONSTRAINT `FKnn8mwlbm06forw2khkvk0maiv` FOREIGN KEY (`cliente_id`) REFERENCES `cliente` (`id`),
   ADD CONSTRAINT `FKs0nc9cxdffdiydilxjb85xgv1` FOREIGN KEY (`oficina_id`) REFERENCES `oficina` (`id`);
 
 --
--- Constraints for table `contrato_alquiler_vehiculo`
+-- Filtros para la tabla `contrato_alquiler_vehiculo`
 --
 ALTER TABLE `contrato_alquiler_vehiculo`
   ADD CONSTRAINT `FK1ohnaw9tc2qrlks50wiss14tk` FOREIGN KEY (`vehiculo_id`) REFERENCES `vehiculo` (`id`),
